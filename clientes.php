@@ -1,9 +1,12 @@
 <?php
-$codClient = $_GET['cod'];
 require_once 'Class/Cliente.php';
 require_once 'Class/Local.php';
+
+$codClient = $_GET['cod'];
+
 $cliente = new Cliente();
 $arrayClientes = $cliente->listarEmpleados($codClient);
+
 $local = new Local();
 $arrayLocales = $local->listarLocales();
 
