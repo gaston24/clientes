@@ -1,6 +1,6 @@
 <?php
-require_once 'Class/Cliente.php';
-require_once 'Class/Local.php';
+require_once __DIR__.'/Class/Cliente.php';
+require_once __DIR__.'/Class/Local.php';
 
 $codClient = $_GET['cod'];
 
@@ -21,7 +21,7 @@ $arrayLocales = $local->listarLocales();
 ?>
 </head>
 <body>
-<form action="procesar.php" id="pedidos" style="margin:20px" method="GET">
+<form action="Controlador/procesar.php" id="pedidos" style="margin:20px" method="POST">
 
 ESTADO:
 <select name="cliente">

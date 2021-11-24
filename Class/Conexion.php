@@ -20,4 +20,13 @@ class Conexion {
 
         return $cid;
     }
+
+    public function conexionLocal($dsn){
+        $user = "sa";
+        $pass = "Axoft";
+        $cid = odbc_connect($dsn, $user, $pass);
+        if(!$cid){echo "</br>Imposible conectarse a la base de datos!</br>";}
+
+        return $cid;
+    }
 }
