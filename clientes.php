@@ -47,6 +47,9 @@ foreach($arrayLocales as $v){
 }
 
 ?>
+<input type="checkbox" name="dsn[]" value="region[bsas]">Buenos Aires<br>
+<input type="checkbox" name="dsn[]" value="region[rosario]">Rosario<br>
+<input type="checkbox" name="dsn[]" value="region[mardel]">Mar del Plata<br>
 </div>
 
 
