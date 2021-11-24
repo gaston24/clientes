@@ -1,10 +1,16 @@
+<?php
+$codClient = $_GET['cod'];
+require_once 'Class/Cliente.php';
+$cliente = new Cliente();
+$arrayClientes = $cliente->listarEmpleados($codClient);
+?>
 <!doctype html>
 <html>
 <head>
 
 <title>Clientes</title>
 <?php include '../css/header.php' ;
-$codClient = $_GET['cod'];
+
 ?>
 </head>
 <body>
@@ -13,17 +19,8 @@ $codClient = $_GET['cod'];
 ESTADO:
 <select name="cliente">
 <?php
-$dsn = "LOCALES";
-$user = "sa";
-$pass = "Axoft";
-$cid = odbc_connect($dsn, $user, $pass);
-if(!$cid){echo "</br>Imposible conectarse a la base de datos!</br>";}
-$sql="SELECT * FROM GVA14 WHERE COD_CLIENT LIKE '$codClient%' ORDER BY COD_CLIENT DESC";
-$result=odbc_exec($cid,$sql)or die(exit("Error en odbc_exec"));
-while($v=odbc_fetch_object($result)){
-
-echo '<option value="'.$v->COD_CLIENT.'">'.$v->COD_CLIENT.' - '.$v->NOM_COM.'</option>';
-
+foreach($arrayClientes as $v){
+    echo '<option value="'.$v['COD_CLIENT'].'">'.$v['COD_CLIENT'].' - '.$v['NOM_COM'].'</option>';
 }
 ?>
 </select>
