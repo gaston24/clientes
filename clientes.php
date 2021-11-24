@@ -1,8 +1,12 @@
 <?php
 $codClient = $_GET['cod'];
 require_once 'Class/Cliente.php';
+require_once 'Class/Local.php';
 $cliente = new Cliente();
 $arrayClientes = $cliente->listarEmpleados($codClient);
+$local = new Local();
+$arrayLocales = $local->listarLocales();
+
 ?>
 <!doctype html>
 <html>
@@ -18,9 +22,13 @@ $arrayClientes = $cliente->listarEmpleados($codClient);
 
 ESTADO:
 <select name="cliente">
+
 <?php
+
 foreach($arrayClientes as $v){
-    echo '<option value="'.$v['COD_CLIENT'].'">'.$v['COD_CLIENT'].' - '.$v['NOM_COM'].'</option>';
+    ?>
+    <option value="<?=$v[0]->COD_CLIENT?>"><?=$v[0]->COD_CLIENT?> - <?=$v[0]->NOM_COM?></option>
+    <?php
 }
 ?>
 </select>
@@ -28,16 +36,11 @@ foreach($arrayClientes as $v){
 <br>
 <div>
 <?php
-$dsn = "1 - CENTRAL";
-$user = "sa";
-$pass = "Axoft1988";
-$cid = odbc_connect($dsn, $user, $pass);
-if(!$cid){echo "</br>Imposible conectarse a la base de datos!</br>";}
-$sql2="SELECT A.NRO_SUCURSAL, A.DESC_SUCURSAL, B.DSN FROM SUCURSAL A INNER JOIN SOF_USUARIOS B ON A.NRO_SUCURSAL = B.NRO_SUCURS
-WHERE CA_423_HABILITADO = 1 AND NRO_SUCURSAL BETWEEN 2 AND 100 GROUP BY A.NRO_SUCURSAL, A.DESC_SUCURSAL, B.DSN ORDER BY 1";
-$result2=odbc_exec($cid,$sql2)or die(exit("Error en odbc_exec"));
-while($v=odbc_fetch_object($result2)){
-echo '<input type="checkbox" name="dsn[]" value="'.$v->DSN.'">'.$v->NRO_SUCURSAL.' - '.$v->DESC_SUCURSAL.'<br>';
+
+foreach($arrayLocales as $v){
+    ?>
+    <input type="checkbox" name="dsn[]" value="<?=$v[0]->DSN?>"><?=$v[0]->NRO_SUCURSAL?> - <?=$v[0]->DESC_SUCURSAL?><br>
+    <?php
 }
 
 ?>
